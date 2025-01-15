@@ -1,53 +1,25 @@
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Button } from "react-native";
+import { StyleSheet } from "react-native";
+import React from "react";
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import Home from "./src/screens/Home";
+import Profile from "./src/screens/Profile";
+import Search from "./src/screens/Search";
+
+const Stack = createStackNavigator();
 
 const App = () => {
-
-  const [text, setText] = useState('');
-  const[sumittedText, setSubmittedText] = useState('');
-
-  const handleSubmit =  () =>{
-    setSubmittedText(text);
-    setText('');
-  }
-
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Hello World</Text>
-      <TextInput
-        placeholder="Enter your name"
-        style={styles.input}
-        value={text}
-        onChangeText={setText}
-      />
-      <Button title="Submit" onPress={handleSubmit}></Button>
-      {sumittedText ? (<Text>Result : {text}</Text>) : null}
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Home">
+        <Stack.Screen name="Home" component={Home} />
+        <Stack.Screen name="Profile" component={Profile} />
+        <Stack.Screen name="Search" component={Search} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 }
 
 export default App;
 
-const styles = StyleSheet.create({  
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignContent: 'center',
-    padding: 20,
-    gap: 10,
-  },
-  title: {  
-    fontSize: 20,
-    fontWeight: '500',
-    textAlign: 'center',
-    alignItems: 'center',
-    color: 'blue',
-  },  
-  input: {
-    width: '100%',
-    padding: 5,
-    paddingVertical: 10,
-    borderWidth: 1,
-    borderRadius: 5,
-  }
-}); 
+const styles = StyleSheet.create({});
